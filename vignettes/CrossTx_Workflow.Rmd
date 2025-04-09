@@ -1,0 +1,90 @@
+---
+title: "CrossTx Workflow Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{CrossTx Workflow Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(CrossTx)
+```
+
+# Introduction
+
+The **CrossTx** R package provides a cross-species transcriptomic similarity analysis workflow for mouse and human cancer models. This vignette demonstrates the complete analysis using the built-in example dataset `CrossTx_example_data`, avoiding any file-based dependencies.
+
+# Load Example Data
+
+```{r}
+data(CrossTx_example_data)
+str(CrossTx_example_data, max.level = 2)
+```
+
+# DEG Volcano Plot
+
+```{r, eval=FALSE}
+# Merging human and mouse DEG data
+merged_DEG <- merge_DEG_datasets(...)
+plot_DEG_volcano(deg_data = merged_DEG)
+```
+
+# DEG Heatmap and Barplot
+
+```{r, eval=FALSE}
+heatmap_input <- prepare_DEG_heatmap_data(...)
+merge_edger <- plot_DEG_heatmap(...)
+plot_DEG_barplot(merge_edger)
+```
+
+# PCA Similarity Analysis
+
+```{r, eval=FALSE}
+sample_counts <- list(
+  TCGA = c(normal = 2, tumor = 3),
+  GSEXXX = c(normal = 3, tumor = 3)
+)
+
+pca_data <- prepare_PCA_data(...)
+plot_PCA_tinyarray(pca_data)
+```
+
+# TROM Similarity Analysis
+
+```{r, eval=FALSE}
+merge_clinic_CNV <- prepare_similarity_data(...)
+similarity <- compute_similarity_matrix(...)
+heatmap_res <- plot_TROMscore_heatmap(...)
+plot_TROMscore_boxplot(merge_long = heatmap_res$merge_long)
+```
+
+# Tumor Microenvironment Analysis
+
+```{r, eval=FALSE}
+TME_result <- plot_TME_barplot(...)
+plot_TME_boxplot(TME_result)
+```
+
+# GO Enrichment Analysis
+
+```{r, eval=FALSE}
+GO_enrichment_analysis(...)
+```
+
+# Metabolism Scoring
+
+```{r, eval=FALSE}
+sig_meta <- calculate_metabolism_score(...)
+plot_metabolism_heatmap(sig_meta)
+```
+
+# Session Info
+
+```{r}
+sessionInfo()
+```

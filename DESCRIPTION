@@ -1,0 +1,56 @@
+Package: CrossTx
+Title: Cross-Species Transcriptomic Similarity Analysis
+Version: 0.99.0
+Authors@R: 
+    c(person(given = "Dian", 
+            family = "Wang",  
+            email = "wangdian020803@gmail.com", 
+            role = c("aut", "cre")),
+    person(given = "Guiwen",
+          family = "Guan",
+          email = "guanguiwen@bjmu.edu.cn",
+          role = "aut"))
+Description: CrossTx is a comprehensive R package designed for cross-species
+  transcriptomic similarity analysis between human cancer and clinical
+  mouse models. It implements standardized pipelines for DEG analysis, homolog
+  gene conversion, PCA, immune infiltration, GO enrichment, and similarity
+  scoring. With built-in data formatting and flexible visualization functions,
+  CrossTx enables reproducible and scalable evaluation of murine models that
+  best mimic human disease transcriptional profiles, facilitating rational
+  model selection in translational research.
+License: GPL-3
+LazyData: True
+LazyDataCompression: xz
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+biocViews: GeneExpression, Transcriptomics, ComparativeGenomics, 
+    Visualization, Cancer, Mouse, HumanData, FunctionalAnnotation, 
+    PathwayAnalysis
+Imports: 
+    dplyr,
+    IOBR,
+    TROM,
+    magrittr,
+    ggplot2,
+    org.Hs.eg.db,
+    org.Mm.eg.db,
+    org.Rn.eg.db,
+    tools,
+    homologene,
+    ComplexHeatmap,
+    tidyr,
+    sva,
+    tinyarray,
+    circlize,
+    patchwork,
+    AnnotationDbi,
+    clusterProfiler,
+    simplifyEnrichment,
+    grid
+Depends: 
+    R (>= 3.5)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
