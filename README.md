@@ -8,7 +8,7 @@ By integrating DEG analysis, PCA, TROM scoring, immune profiling, and GO enrichm
 
 ### CrossTx package workflow
 
-![workflow](H:\Software\Typora\picture\workflow-1744205959593-1.png)
+![workflow](./figure/workflow.png)
 
 ---
 
