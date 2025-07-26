@@ -28,7 +28,7 @@ devtools::install_github("wangdian-PKU/CrossTx")
 
 ## 3. User Manual
 
-Detailed guidance of how to use IOBR could be found in the https://wangdian-pku.github.io/CrossTxManual/.
+Detailed guidance of how to use CrossTx could be found in the https://wangdian-pku.github.io/CrossTxManual/.
 
 ---
 
