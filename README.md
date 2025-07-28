@@ -38,4 +38,4 @@ We are always open to your questions and encourage discussions here.
 
 You can report potential bugs to the [issues](https://github.com/wangdian-PKU/CrossTx/issues).
 
-Any question can directly contact the author by email: wangdian020803@gmail.com
+Any question can directly contact the author by email: wangdian@bjmu.edu.cn
