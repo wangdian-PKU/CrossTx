@@ -3,20 +3,20 @@
 #' Creates a volcano plot for visualizing differential gene expression (DEG) data.
 #'
 #' @description
-#' This function generates a **volcano plot** that displays the log2 fold change (logFC)
+#' This function generates a volcano plot that displays the log2 fold change (logFC)
 #' against the -log10 false discovery rate (FDR) of differentially expressed genes.
 #'
 #' @details
-#' - Highlights significantly **upregulated**, **downregulated**, and **stable** genes.
-#' - Users can **customize colors, axis labels, title, and save format**.
+#' - Highlights significantly upregulated, downregulated, and stable genes.
+#' - Users can customize colors, axis labels, title, and save format.
 #'
-#' @param deg_data Data frame containing DEG results. Output result from `merge_DEG_datasets()`
-#'                 Must include columns: `logFC`, `FDR`, `contrast`, `gene`, `change`.
+#' @param deg_data Data frame containing DEG results. Output result from 'merge_DEG_datasets()'
+#'                 Must include columns: 'logFC', 'FDR', 'contrast', 'gene', 'change'.
 #' @param title Character. Title of the volcano plot (default: "Volcano Plot of DEG Analysis").
 #' @param xlab Character. Label for the x-axis (default: "Group").
 #' @param ylab Character. Label for the y-axis (default: "Log2 Fold Change").
-#' @param colors Named list with colors for upregulated (`"Up"`), downregulated (`"Down"`), and stable (`"Stable"`) genes.
-#'               Default: `list(Up = "#e6550d", Down = "#3182bd", Stable = "#636363")`.
+#' @param colors Named list with colors for upregulated ("Up"), downregulated ("Down"), and stable ("Stable") genes.
+#'               Default: list(Up = "#e6550d", Down = "#3182bd", Stable = "#636363").
 #' @param point_size Numeric. Size of points in the plot (default: 2).
 #' @param alpha_range Numeric vector. Range for transparency based on -log10(FDR) (default: c(0.3, 1)).
 #' @param x_angle Numeric. Angle of x-axis labels (default: 45).
@@ -27,7 +27,7 @@
 #'
 #' @importFrom ggplot2 ggplot geom_point aes geom_hline scale_color_manual scale_alpha labs theme_bw theme element_text ggsave
 #'
-#' @return A `ggplot` object representing the volcano plot.
+#' @return A 'ggplot' object representing the volcano plot.
 #' \describe{
 #'   \item{Visual Output}{A scatter plot with logFC on the y-axis and contrast groups on the x-axis.}
 #'   \item{Customization}{Users can further modify the plot using `ggplot2` functions.}
