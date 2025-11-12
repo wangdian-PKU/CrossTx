@@ -1,9 +1,9 @@
 #' Example input dataset for the CrossTx transcriptome similarity workflow
 #'
 #' A deeply nested list containing all necessary input data to demonstrate the full
-#' transcriptome similarity analysis pipeline implemented in the **CrossTx** package.
+#' transcriptome similarity analysis pipeline implemented in the CrossTx package.
 #' This includes expression, DEG, homolog, and clinical datasets across three cancer types:
-#' **COAD**, **LUAD**, and **BRCA**, each with TCGA data and 2–3 matched mouse models.
+#' COAD, LUAD, and BRCA, each with TCGA data and 2–3 matched mouse models.
 #'
 #' @format A nested list of 3 cancer types:
 #' \describe{
@@ -23,7 +23,7 @@
 #' }
 #'
 #' @details This dataset is intended for demonstration and reproducibility
-#' purposes. All example files are preprocessed and provided in `.tsv` format
+#' purposes. All example files are preprocessed and provided in .tsv format
 #' within the nested list structure. Users can directly load and use
 #' this object to test all functions in the CrossTx package.
 #'
