@@ -3,12 +3,12 @@
 #' This function computes immune infiltration scores using CIBERSORT and generates
 #' boxplots for multiple immune signatures.
 #'
-#' @param eset_tpm Data frame. TPM-transformed RNA-seq expression matrix, output from `plot_TME_barplot()`.
-#' @param group_as Character vector. `Identical` with the `group_as` in `plot_TME_barplot()`.
-#' @param condition_list Named list. Sample count for each mouse model (e.g., `list("DEN" = 6, "GSExxx" = 8)`).
+#' @param eset_tpm Data frame. TPM-transformed RNA-seq expression matrix, output from 'plot_TME_barplot()'.
+#' @param group_as Character vector. 'Identical' with the 'group_as' in 'plot_TME_barplot()'.
+#' @param condition_list Named list. Sample count for each mouse model (e.g., 'list("DEN" = 6, "GSExxx" = 8)').
 #' @param width Integer. Width of saved plots (default: 10).
 #' @param height Integer. Height of saved plots (default: 6).
-#' @param output_path Character. Directory path to save boxplots (default: `"./TME_boxplots"`).
+#' @param output_path Character. Directory path to save boxplots (default: "./TME_boxplots").
 #'
 #' @importFrom ggplot2 geom_boxplot labs aes theme_bw theme element_text element_line element_blank ggsave
 #' @importFrom dplyr mutate select all_of
@@ -32,8 +32,8 @@ plot_TME_boxplot <- function(eset_tpm,
                              height = 6,
                              output_path = "./TME_boxplots") {
   # Step 1: Validate Inputs
-  if (!is.data.frame(eset_tpm)) stop("Error: `eset_tpm` must be a data frame.")
-  if (length(group_as) != ncol(eset_tpm)) stop("Error: `group_as` length must match number of samples (columns in `eset_tpm`).")
+  if (!is.data.frame(eset_tpm)) stop("Error: 'eset_tpm' must be a data frame.")
+  if (length(group_as) != ncol(eset_tpm)) stop("Error: 'group_as' length must match number of samples (columns in 'eset_tpm').")
 
   # Step 2: Compute Immune Cell Fractions
   message("Computing immune infiltration scores using CIBERSORT...")
