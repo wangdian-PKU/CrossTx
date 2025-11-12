@@ -1,13 +1,13 @@
 #' Heatmap for DEG Analysis Based on TCGA High and Low Expression Groups
 #'
-#' This function generates a **heatmap** of log fold changes (logFC)
+#' This function generates a heatmap of log fold changes (logFC)
 #' for differentially expressed genes (DEGs) across multiple datasets.
 #'
 #' @importFrom ComplexHeatmap Heatmap draw
 #'
-#' @param deg_data List. Output `processed data` from `prepare_DEG_heatmap_data()`, containing processed TCGA and mouse DEG data.
-#' @param mouse_files Named list. The original input `mouse_files` from `merge_DEG_datasets()`, needed for column names.
-#' @param col_names Character vector. Custom column names for the heatmap. Default uses `names(mouse_files)`.
+#' @param deg_data List. Output 'processed data' from 'prepare_DEG_heatmap_data()', containing processed TCGA and mouse DEG data.
+#' @param mouse_files Named list. The original input 'mouse_files' from 'merge_DEG_datasets()', needed for column names.
+#' @param col_names Character vector. Custom column names for the heatmap. Default uses 'names(mouse_files)'.
 #' @param cluster_rows Logical. Whether to cluster rows (default: FALSE).
 #' @param cluster_cols Logical. Whether to cluster columns (default: FALSE).
 #' @param color_palette Named vector. Colors for the heatmap (default: c("1" = "#ff7676", "-1" = "#66d4ff", "NA" = "white")).
@@ -15,7 +15,7 @@
 #' @param height Integer. The height of pdf (default: 5.95).
 #' @param output_path Character. File path for saving the plot (default: "./DEG/").
 #'
-#' @return A matrix (`merge_edger`) containing merged DEG expression data as the input object of `plot_DEG_barplot()`
+#' @return A matrix ('merge_edger') containing merged DEG expression data as the input object of 'plot_DEG_barplot()'
 #'
 #' @examples
 #' \dontrun{
@@ -35,7 +35,7 @@ plot_DEG_heatmap <- function(deg_data,
                              output_path = "./DEG/") {
   # Ensure input is correctly formatted
   if (!is.list(deg_data) || !all(c("processed_tcga", "processed_mouse", "tcga_gene_list") %in% names(deg_data))) {
-    stop("Error: Input data must be the output from `prepare_DEG_heatmap_data()`.")
+    stop("Error: Input data must be the output from 'prepare_DEG_heatmap_data()'.")
   }
 
   # Extract processed mouse DEG data
@@ -47,15 +47,15 @@ plot_DEG_heatmap <- function(deg_data,
   # Ensure matrix formatting
   merge_edger <- as.matrix(merge_edger)
 
-  # Restore row names using `tcga_gene_list`
+  # Restore row names using 'tcga_gene_list'
   rownames(merge_edger) <- deg_data$tcga_gene_list
 
   # Assign column names
   if (is.null(col_names)) {
-    colnames(merge_edger) <- names(mouse_files) # Default: use `names(mouse_files)`
+    colnames(merge_edger) <- names(mouse_files) # Default: use 'names(mouse_files)'
   } else {
     if (length(col_names) != ncol(merge_edger)) {
-      stop("Error: `col_names` length does not match number of columns in heatmap.")
+      stop("Error: 'col_names' length does not match number of columns in heatmap.")
     }
     colnames(merge_edger) <- col_names # User-defined column names
   }
@@ -71,11 +71,11 @@ plot_DEG_heatmap <- function(deg_data,
   # Save heatmap to file
   grDevices::pdf(output_file, width = width, height = height)
 
-  # **Update legend labels**
+  # Update legend labels
   legend_labels <- c("Highly expression in tumor", "Low expression in tumor")
   names(legend_labels) <- c("1", "-1")
 
-  # **Ensure Heatmap is drawn**
+  # Ensure Heatmap is drawn
   heatmap_obj <- Heatmap(merge_edger,
     col = color_palette,
     cluster_rows = cluster_rows,
