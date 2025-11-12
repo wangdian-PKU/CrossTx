@@ -61,7 +61,7 @@ GO_enrichment_analysis <- function(deg_file,
                                    width = 10.36,
                                    height = 6.35,
                                    output_path = "./enrichment") {
-  # Check if the `species` parameter is valid
+  # Check if the "species" parameter is valid
   species_list <- c("hsa", "mmu", "rno")
   if (!species %in% species_list) {
     stop("Error: "species" must be one of 'hsa', 'mmu', or 'rno'.")
