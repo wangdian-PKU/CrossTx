@@ -13,16 +13,16 @@
 #' column names and labels, making it suitable for visualization and further analysis.
 #'
 #' @details
-#' - **Supported file formats:** `.tsv` (tab-separated) and `.csv` (comma-separated).
-#' - **Required columns:** `gene`, `logFC`, `FDR`.
+#' - Supported file formats: .tsv (tab-separated) and .csv (comma-separated).
+#' - Required columns: 'gene', 'logFC', 'FDR'.
 #' - If a file format is not supported, an error message will be displayed.
-#' - **DEG threshold:** You can customize `logFC` and `FDR` thresholds (default: logFC > 1, FDR < 0.05).
+#' - DEG threshold: You can customize 'logFC' and 'FDR' thresholds (default: logFC > 1, FDR < 0.05).
 #'
 #' @importFrom dplyr mutate bind_rows case_when
 #' @importFrom tools file_ext
 #'
-#' @param human_file_path Character. Path to the TCGA human cancer DEG `.tsv` or `.csv` file.
-#' @param mouse_files Named list of file paths to mouse cancer model DEG `.tsv` or `.csv` files.
+#' @param human_file_path Character. Path to the TCGA human cancer DEG .tsv or .csv file.
+#' @param mouse_files Named list of file paths to mouse cancer model DEG .tsv or .csv files.
 #'                    Each element should be named according to the dataset source.
 #' @param logFC_value Numeric. Threshold for log2 fold change (default: 1).
 #' @param FDR_value Numeric. Threshold for adjusted p-value (default: 0.05).
@@ -55,7 +55,7 @@
 #'
 #' @export
 merge_DEG_datasets <- function(human_file_path, mouse_files, logFC_value = 1, FDR_value = 0.05) {
-  # **read files**
+  # read files
   read_deg_file <- function(file_path) {
     file_ext <- tolower(file_ext(file_path))
 
@@ -70,17 +70,17 @@ merge_DEG_datasets <- function(human_file_path, mouse_files, logFC_value = 1, FD
     return(data)
   }
 
-  # **read TCGA DEG data**
+  # read TCGA DEG data
   tcga_data <- read_deg_file(human_file_path) %>%
     mutate(contrast = "TCGA", gene = rownames(.))
 
-  # **read mouse_model DEG data**
+  # read mouse_model DEG data
   mouse_list <- lapply(names(mouse_files), function(name) {
     read_deg_file(mouse_files[[name]]) %>%
       mutate(contrast = name, gene = rownames(.))
   })
 
-  # **merge data**
+  # merge data
   merge.diff <- bind_rows(tcga_data, bind_rows(mouse_list)) %>%
     mutate(
       change = case_when(
