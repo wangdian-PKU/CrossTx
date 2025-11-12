@@ -18,9 +18,9 @@
 #' @export
 calculate_metabolism_score <- function(eset_tpm, method = "pca", mini_gene_count = 2) {
   # Input validation
-  if (!is.data.frame(eset_tpm)) stop("Error: `eset_tpm` must be a data frame.")
+  if (!is.data.frame(eset_tpm)) stop("Error: 'eset_tpm' must be a data frame.")
   if (!method %in% c("pca", "ssgsea", "zscore", "integration")) {
-    stop("Error: `method` must be one of 'pca', 'ssgsea', 'zscore', or 'integration'.")
+    stop("Error: 'method' must be one of 'pca', 'ssgsea', 'zscore', or 'integration'.")
   }
 
   # Calculate signature score using IOBR::calculate_sig_score
