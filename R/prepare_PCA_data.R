@@ -4,14 +4,14 @@
 #' to generate a merged expression matrix suitable for PCA analysis.
 #'
 #' @description
-#' - Reads expression data from **TCGA** and **multiple mouse cancer models**.
+#' - Reads expression data from TCGA and multiple mouse cancer models.
 #' - Ensures gene expression data are standardized and merged based on homologous genes.
-#' - Allows optional **batch correction** using `ComBat`.
+#' - Allows optional batch correction using 'ComBat'.
 #'
 #' @details
-#' - Uses **gene names as row identifiers** to merge datasets.
-#' - **Sample grouping** (`group_all`) and **batch effects** (`batch`) are dynamically assigned.
-#' - If `batch_correction = TRUE`, batch correction is applied using `ComBat`.
+#' - Uses gene names as row identifiers to merge datasets.
+#' - Sample grouping ('group_all') and batch effects ('batch') are dynamically assigned.
+#' - If 'batch_correction = TRUE', batch correction is applied using 'ComBat'.
 #'
 #' @importFrom sva ComBat
 #' @importFrom tools file_ext
@@ -19,16 +19,16 @@
 #' @param tcga_file Character. Path to TCGA expression data file.
 #' @param mouse_files Named list of file paths for mouse model expression data.
 #' @param sample_counts Named list specifying the number of normal and tumor samples for each dataset.
-#'                      Each dataset must have a `normal` and `tumor` entry, e.g.,
-#'                      `list("TCGA" = c(normal = 50, tumor = 374), "Our_Model" = c(normal = 3, tumor = 2))`
-#' @param batch_correction Logical. Whether to apply batch correction (default: `TRUE`).
+#'                      Each dataset must have a 'normal' and 'tumor' entry, e.g.,
+#'                      'list("TCGA" = c(normal = 50, tumor = 374), "Our_Model" = c(normal = 3, tumor = 2))'
+#' @param batch_correction Logical. Whether to apply batch correction (default: 'TRUE').
 #'
 #' @return A list containing:
 #' \describe{
 #'   \item{merged_data}{Merged expression matrix (genes × samples).}
 #'   \item{group_all}{Sample group labels (normal/tumor for each dataset).}
 #'   \item{batch}{Batch assignment for each sample (dataset source).}
-#'   \item{corrected_data}{Batch-corrected expression matrix (if `batch_correction = TRUE`).}
+#'   \item{corrected_data}{Batch-corrected expression matrix (if 'batch_correction = TRUE').}
 #' }
 #'
 #' @examples
@@ -64,13 +64,13 @@ prepare_PCA_data <- function(tcga_file, mouse_files, sample_counts, batch_correc
     }
   }
 
-  # **Read TCGA data**
+  # Read TCGA data
   tcga_data <- read_expression_file(tcga_file)
 
-  # **Read mouse model data**
+  # Read mouse model data
   mouse_list <- lapply(mouse_files, read_expression_file)
 
-  # **Merge all datasets using gene names**
+  # Merge all datasets using gene names
   merged_data <- tcga_data
   for (i in mouse_list) {
     merged_data <- merge(merged_data, i, by = "X")
@@ -78,14 +78,14 @@ prepare_PCA_data <- function(tcga_file, mouse_files, sample_counts, batch_correc
   rownames(merged_data) <- merged_data$X
   merged_data <- merged_data[, -1] # Remove redundant index column
 
-  # **Create sample group labels (`group_all`)**
+  # Create sample group labels ('group_all')
   group_all <- unlist(lapply(names(sample_counts), function(dataset) {
     normal_count <- sample_counts[[dataset]]["normal"]
     tumor_count <- sample_counts[[dataset]]["tumor"]
     c(rep(paste0(dataset, "_normal"), normal_count), rep(paste0(dataset, "_tumor"), tumor_count))
   }))
 
-  # **Generate sample names (`colnames(merged_data)`)**
+  # Generate sample names ('colnames(merged_data)')
   tcga_sample_count <- sample_counts[["TCGA"]]["normal"] + sample_counts[["TCGA"]]["tumor"]
   tcga_colnames <- colnames(merged_data)[1:tcga_sample_count] # Preserve TCGA column names
 
@@ -103,12 +103,12 @@ prepare_PCA_data <- function(tcga_file, mouse_files, sample_counts, batch_correc
   }
   colnames(merged_data) <- c(tcga_colnames, other_sample_names)
 
-  # **Assign batch effects**
+  # Assign batch effects
   batch <- unlist(lapply(names(sample_counts), function(dataset) {
     rep(dataset, sum(sample_counts[[dataset]]))
   }))
 
-  # **Batch correction using `ComBat`**
+  # Batch correction using 'ComBat'
   corrected_data <- if (batch_correction) {
     ComBat(dat = as.matrix(merged_data), batch = batch)
   } else {
